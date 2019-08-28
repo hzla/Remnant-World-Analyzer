@@ -56,6 +56,10 @@
                 eventType = "World Boss"
                 eventName = textLine.split("/")[3].split("_")[2]
             }
+            if (textLine.search("Siege") != -1) {
+                eventType = "Siege"
+                eventName = textLine.split("/")[3].split("_")[2]
+            }
             if (textLine.search("Mini") != -1) {
                 eventType = "Miniboss"
                 eventName = textLine.split("/")[3].split("_")[2]
