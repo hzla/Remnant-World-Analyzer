@@ -1,0 +1,76 @@
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: #343a40;
+  color: #f8f9fa;
+  position: relative;
+}
+
+h1 {
+  font-size: 48px;
+  margin-bottom: 5vh;
+  width: 100%;
+  text-align: center;
+}
+
+.info button:hover {
+  cursor: pointer;
+}
+
+p {
+  width: 50%;
+  margin-left: 25%;
+}
+
+input, button {
+  height: 32px;
+  margin-left: calc(25vw);
+  width: 140px;
+  border-radius: 5px;
+  font-size: 24px;
+  padding: 4px 10px;
+  border: none;
+  margin-top: 40px;
+
+}
+
+#filters {
+  position: fixed;
+  right: calc(75vw);
+  display: none;
+  width: 320px;
+}
+
+#filters button {
+  width: 320px;
+  margin-left: 0px;
+}
+
+#chances, .piece-table {
+  margin-top: 40px;
+  font-family: 'Roboto', sans-serif;
+  border-collapse: collapse;
+  width: 50%;
+  margin-left: calc(25vw);
+  font-size: 28px;
+}
+
+#chances td, #chances th, .piece-table td, .piece-table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+
+/* .piece-table tr:nth-child(even)  {
+  background-color: #f2f2f2;
+  color: #343a40;
+}*/
+
+#chances th, .piece-table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #70a1ff;
+  color: white;
+}
+

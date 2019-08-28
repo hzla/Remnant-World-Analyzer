@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <script
+          src="https://code.jquery.com/jquery-3.4.0.min.js"
+          integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg="
+          crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="index.css">
+        <script src="index.js"></script>
+
+    </head>
+    <body>
+        <h1>Remnant: From the Ashes World Analyzer</h1>
+
+        <p>
+            How to use:<br>
+            Navigate to C:/Users/YOUR USER NAME/AppData/Local/Remant/Saved/SaveGames and locate the file named something like save_0.bak or save_0.sav. Upload to see what you rolled. Table entries are shown in the rough order you'll encounter as you play through.
+        </p>
+        <input type="file" onchange="loadFile(this)">
+
+        <div id="filters">
+            <button id="toggle-items">Only Items</button>
+            <button id="toggle-sd">Only Side Dungeons</button>
+            <button id="toggle-mb">Only Mini Bosses</button>
+            <button id="toggle-bosses">Only Bosses</button>
+            <button id="toggle-all">Show All</button>
+        </div>
+
+
+        <table class="piece-table">
+            <thead>
+                <tr>
+                    <th class="headerSort" tabindex="0" role="columnheader button">Location
+                    </th>
+                    <th class="headerSort" tabindex="0" role="columnheader button">Event Type
+                    </th>
+                     <th class="headerSort" tabindex="0" role="columnheader button">Event Name
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="events">
+                
+            </tbody>
+            <tfoot></tfoot>
+        </table>
+    </body>
+</html>
