@@ -15,15 +15,15 @@
 
         <p>
             How to use:<br>
-            Navigate to C:/Users/YOUR USER NAME/AppData/Local/Remnant/Saved/SaveGames and locate the file named something like save_0.bak or save_0.sav. Upload to see what you rolled. Table entries are shown in the rough order you'll encounter as you play through.<br>
-           <br><br>
-            Credits to /u/FAOAB on reddit for this <a href="https://docs.google.com/spreadsheets/d/1VzmDx0ZXQWN5N_9_zP0gEqToyuB9ZjlxgZOEGdiuA6A/edit#gid=2123178902" style='color:white;'> spreadsheet</a> that helped me sort out some of the more confusing names.  
+            Navigate to C:/Users/YOUR USER NAME/AppData/Local/Remant/Saved/SaveGames and locate the file named something like save_0.bak or save_0.sav. Upload to see what you rolled. Table entries are shown in the rough order you'll encounter as you play through.<br><br>
+            Credits to /u/FAOAB on reddit for this <a href="https://docs.google.com/spreadsheets/d/1VzmDx0ZXQWN5N_9_zP0gEqToyuB9ZjlxgZOEGdiuA6A/edit#gid=2123178902" style='color:white;'> spreadsheet</a> that helped me sort out some of the more confusing names. 
         </p>
         <input type="file" onchange="loadFile(this)">
 
         <div id="filters">
             <button id="toggle-items">Only Items</button>
             <button id="toggle-sd">Only Side Dungeons</button>
+            <button id="toggle-sieges">Only Sieges</button>
             <button id="toggle-mb">Only Mini Bosses</button>
             <button id="toggle-bosses">Only Bosses</button>
             <button id="toggle-all">Show All</button>
@@ -32,7 +32,7 @@
 
         <table class="piece-table">
             <thead>
-                <tr>
+                <tr class="header-row">
                     <th class="headerSort" tabindex="0" role="columnheader button">Location
                     </th>
                     <th class="headerSort" tabindex="0" role="columnheader button">Event Type
