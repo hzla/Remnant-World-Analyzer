@@ -39,6 +39,7 @@ input, button {
   right: calc(75vw);
   display: none;
   width: 320px;
+  top: 25vw;
 }
 
 #filters button {
