@@ -133,8 +133,17 @@ function loadFile(o)
                 currentSublocation = sublocations[eventName]
             }
             if (textLine.search("Quest_Event") != -1) {
-                eventType = "Item Drop"
+                eventType = "Item"
                 eventName = textLine.split("/")[3].split("_")[2]
+            }
+
+            if (textLine.search("OverWorldPOI") != -1 || textLine.search("OverworldPOI") != -1) {
+                if(textLine.search("StuckMerchant") != -1 || textLine.search("WailingWood") != -1 || textLine.search("Flautist") != -1 || textLine.search("MudTooth") != -1){
+                    eventType = "NPC"
+                    eventName = textLine.split("/")[3].split("_")[2]
+                    currentSublocation = ''
+                }
+         
             }
 
             if (textLine.search("Overworld_Zone") != -1) {
@@ -182,7 +191,7 @@ $( document ).ready(function() {
     $('#toggle-items').on('click', function() {
        $('tr:not(.header-row)').hide()
         $('td').each(function() {
-            if ($(this).text().search('Item Drop') != -1) {
+            if ($(this).text().search('Item') != -1) {
                 $(this).parent().show()
             }
         })
@@ -221,6 +230,15 @@ $( document ).ready(function() {
         })
         
     })
+    $('#toggle-npcs').on('click', function() {
+        $('tr:not(.header-row)').hide()
+         $('td').each(function() {
+             if ($(this).text().search('NPC') != -1) {
+                 $(this).parent().show()
+             }
+         })
+         
+     })
         $('#toggle-all').on('click', function() {
             $('tr').show()
     })
