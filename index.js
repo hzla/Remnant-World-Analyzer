@@ -48,14 +48,6 @@ mainLocations = {
  "Swamp Overworld Zone2": "TheMistFen"
 }
 
-
-
-
-
-
-
-
-
 function loadFile(o)
     {
         var fr = new FileReader();
@@ -76,8 +68,7 @@ function loadFile(o)
         textArray = text.split("\n")
 
         zones = {}
-
-
+        
         zones["Earth"] = {}
         zones["Rhom"] = {}
         zones["Yaesha"] = {}
@@ -92,7 +83,6 @@ function loadFile(o)
             var eventName;
             var lastEventname;
             var inSmallDungeon = true;
-
 
             textLine = textArray[i]
             if ( textLine.search("World_City") != -1) {
@@ -139,11 +129,8 @@ function loadFile(o)
 
             if (textLine.search("Overworld_Zone") != -1) {
                 currentMainLocation = textLine.split("/")[3].split("_")[1] + " " + textLine.split("/")[3].split("_")[2] + " " +  textLine.split("/")[3].split("_")[3]
-                console.log(currentMainLocation)
-                console.log()
                 currentMainLocation = mainLocations[currentMainLocation]
             }
-            console.log(eventName)
             
             if (eventName != lastEventname) {
               // Replacements
@@ -158,27 +145,22 @@ function loadFile(o)
                         if (zones[zone][eventType].search(eventName) == -1) {
                             zones[zone][eventType] += ", " + eventName
 
-                                html = "<tr><td>" + zone + ": " + currentMainLocation.split(/(?=[A-Z])/).join(' ') + ": " + currentSublocation.split(/(?=[A-Z])/).join(' ') +  "</td><td>" + eventType + "</td><td>" + eventName.split(/(?=[A-Z])/).join(' ') + "</td></tr>"
+                            html = "<tr><td>" + zone + ": " + currentMainLocation.split(/(?=[A-Z])/).join(' ') + ": " + currentSublocation.split(/(?=[A-Z])/).join(' ') +  "</td><td>" + eventType + "</td><td>" + eventName.split(/(?=[A-Z])/).join(' ') + "</td></tr>"
                             
                             $('#events').append(html)
-                        } 
-                        
+                        }       
                     } else {
-
                         zones[zone][eventType] = eventName
                             html = "<tr><td>" + zone + ": " + currentMainLocation.split(/(?=[A-Z])/).join(' ') + ": " + currentSublocation.split(/(?=[A-Z])/).join(' ') +  "</td><td>" + eventType + "</td><td>" + eventName.split(/(?=[A-Z])/).join(' ') + "</td></tr>"
                         $('#events').append(html)
                     }
             }
             $('#filters').show()
-
-            }
-            
+            }            
         }
 }
 
 $( document ).ready(function() {
-
     $('#toggle-items').on('click', function() {
        $('tr:not(.header-row)').hide()
         $('td').each(function() {
@@ -209,8 +191,7 @@ $( document ).ready(function() {
             if ($(this).text().search('World Boss') != -1) {
                 $(this).parent().show()
             }
-        })
-        
+        })     
     })
      $('#toggle-sieges').on('click', function() {
        $('tr:not(.header-row)').hide()
@@ -218,8 +199,7 @@ $( document ).ready(function() {
             if ($(this).text().search('Siege') != -1) {
                 $(this).parent().show()
             }
-        })
-        
+        })     
     })
         $('#toggle-all').on('click', function() {
             $('tr').show()
