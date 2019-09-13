@@ -39,7 +39,7 @@ input, button {
   right: calc(75vw);
   display: none;
   width: 320px;
-  top: 25vh;
+  top: 15vh;
 }
 
 #filters button {
@@ -54,6 +54,10 @@ input, button {
   width: 50%;
   margin-left: calc(25vw);
   font-size: 28px;
+}
+
+.adventure-mode {
+  display: none;
 }
 
 #chances td, #chances th, .piece-table td, .piece-table th {
