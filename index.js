@@ -183,7 +183,6 @@ function showDataFile(e, o){
 
     adText = e.target.result
     adText = adText.split(/\/Quests\/Quest_AdventureMode(.+)/)[1].replace(/Game/g,"\n")
-    console.log(adText)
     // adText = adText.split("/Game/World_Base/Quests/Quest_Ward13/Quest_Ward13.Quest_Ward13_C")[0]
         
     
