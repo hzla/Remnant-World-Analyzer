@@ -71,7 +71,7 @@ function getWorldData(textArray, worldMode) {
     var currentMainLocation; 
 
     if (worldMode == "#adventure") {
-        currentMainLocation = textArray[1].split("/")[1].split("_")[1]
+        currentMainLocation = textArray[3].split("/")[1].split("_")[1]
     } else {
         currentMainLocation = "Fairview"
     }
