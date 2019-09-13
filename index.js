@@ -254,4 +254,4 @@ $( document ).ready(function() {
             $('tr').show()
     })
 })
-})
+
