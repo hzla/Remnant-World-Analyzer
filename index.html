@@ -19,30 +19,38 @@
         <script src="index.js"></script>
 
     </head>
-    <body>
+     <body>
         <h1>Remnant: From the Ashes World Analyzer</h1>
 
-        <p>
+         <p>
             How to use:<br>
             Navigate to C:/Users/YOUR USER NAME/AppData/Local/Remant/Saved/SaveGames and locate the file named something like save_0.bak or save_0.sav. Upload to see what you rolled. Table entries are shown in the rough order you'll encounter as you play through.<br><br>
             Credits to /u/FAOAB on reddit for this <a href="https://docs.google.com/spreadsheets/d/1VzmDx0ZXQWN5N_9_zP0gEqToyuB9ZjlxgZOEGdiuA6A/edit#gid=2123178902" style='color:white;'> spreadsheet</a> that helped me sort out some of the more confusing names. 
             <br><br>
             Known Issues:<br> 
             Item locations are not guarenteed to be 100% accurate, don't spend too much time scouring every inch if they're not in the specified area. 
+
+            Update: 
+            Adventure mode is now working as of 9/12/19 8pm Pst. If you are having issues, try refreshing your browser cache first as your browser may be still keeping the old files. <br><br>
+            <b>To analyze adventure mode, you must use the red crystal to travel to the location before the world can be analyzed<b> 
+
+
         </p>
         <input type="file" onchange="loadFile(this)">
 
         <div id="filters">
+            <button id="toggle-adv">Toggle Adventure Mode</button>
             <button id="toggle-items">Only Items</button>
             <button id="toggle-sd">Only Side Dungeons</button>
             <button id="toggle-sieges">Only Sieges</button>
+            <button id="toggle-poi">Only Points of Interest</button>
             <button id="toggle-mb">Only Mini Bosses</button>
             <button id="toggle-bosses">Only Bosses</button>
             <button id="toggle-all">Show All</button>
         </div>
 
 
-        <table class="piece-table">
+        <table class="piece-table main-mode">
             <thead>
                 <tr class="header-row">
                     <th class="headerSort" tabindex="0" role="columnheader button">Location
@@ -53,7 +61,24 @@
                     </th>
                 </tr>
             </thead>
-            <tbody id="events">
+            <tbody id="main">
+                
+            </tbody>
+            <tfoot></tfoot>
+        </table>
+
+         <table class="piece-table adventure-mode">
+            <thead>
+                <tr class="header-row">
+                    <th class="headerSort" tabindex="0" role="columnheader button">Location
+                    </th>
+                    <th class="headerSort" tabindex="0" role="columnheader button">Event Type
+                    </th>
+                     <th class="headerSort" tabindex="0" role="columnheader button">Event Name
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="adventure">
                 
             </tbody>
             <tfoot></tfoot>
