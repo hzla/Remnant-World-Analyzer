@@ -181,17 +181,23 @@ function showDataFile(e, o){
     textArray = text.split("\n")
 
 
-    adText = e.target.result
-    adText = adText.split(/\/Quests\/Quest_AdventureMode(.+)/)[1].replace(/Game/g,"\n")
-    // adText = adText.split("/Game/World_Base/Quests/Quest_Ward13/Quest_Ward13.Quest_Ward13_C")[0]
+   adText = e.target.result
+    adText = adText.split(/\/Quests\/Quest_AdventureMode(.+)/)[1]
+    if (adText != undefined) {
+        adventureMode = true
+        adText = adText.replace(/Game/g,"\n")
+        adTextArray = adText.split("\n")
+    } else {
+        adventureMode = false
+    }
+
         
+   
+
+    if (adventureMode) {
+        getWorldData(adTextArray, "#adventure")
+    } 
     
-
-    
-
-    adTextArray = adText.split("\n")
-
-    getWorldData(adTextArray, "#adventure")
     getWorldData(textArray, "#main")
 
 
