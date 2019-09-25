@@ -34,7 +34,8 @@ sublocations = {
     'TotemFather': "TheScaldingGlade",
     'TheRisen': "Ahanae'sLament",
     'DoeShrine': "Widow'sVestry",
-    'WolfShrine': "Martyr'sSanctuary" 
+    'WolfShrine': "Martyr'sSanctuary",
+    "Splitter": "ResearchStationAlpha"
 }
 
 mainLocations = {
@@ -141,7 +142,7 @@ function getWorldData(textArray, worldMode) {
         if (eventName != lastEventname) {
           // Replacements
             if (eventName != undefined) {
-                 eventName = eventName.replace('TheRisen', 'Reanimators').replace('LizAndLiz', 'LizChicagoTypewriter').replace('Fatty', 'TheUncleanOne').replace('WastelandGuardian', 'Claviger').replace('RootEnt', 'EntBoss').replace('Wolf', 'TheRavager').replace('RootDragon', 'Singe').replace('SwarmMaster', 'Scourge').replace('RootWraith','Shroud').replace('RootTumbleweed', 'TheMangler').replace('Kincaller', 'Warden').replace('Tyrant','Thrall').replace('Vyr', 'ShadeAndShatter').replace('ImmolatorAndZephyr','ScaldAndSear').replace('RootBrute', 'Gorefist').replace('SlimeHulk', 'Canker').replace('BlinkFiend','Onslaught').replace('Sentinel', 'Raze').replace('Penitent', 'Letos Amulet').replace('LastWill', 'SupplyRunAssaultRifle').replace('SwampGuardian','Ixillis')
+                 eventName = eventName.replace('TheRisen', 'Reanimators').replace('LizAndLiz', 'LizChicagoTypewriter').replace('Fatty', 'TheUncleanOne').replace('WastelandGuardian', 'Claviger').replace('RootEnt', 'EntBoss').replace('Wolf', 'TheRavager').replace('RootDragon', 'Singe').replace('SwarmMaster', 'Scourge').replace('RootWraith','Shroud').replace('RootTumbleweed', 'TheMangler').replace('Kincaller', 'Warden').replace('Tyrant','Thrall').replace('Vyr', 'ShadeAndShatter').replace('ImmolatorAndZephyr','ScaldAndSear').replace('RootBrute', 'Gorefist').replace('SlimeHulk', 'Canker').replace('BlinkFiend','Onslaught').replace('Sentinel', 'Raze').replace('Penitent', 'Letos Amulet').replace('LastWill', 'SupplyRunAssaultRifle').replace('SwampGuardian','Ixillis').replace('Splitter','Riphide')
                 
             }
            
