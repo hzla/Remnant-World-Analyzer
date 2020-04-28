@@ -73,6 +73,7 @@ function getWorldData(textArray, worldMode) {
 
     if (worldMode == "#adventure") {
         currentMainLocation = textArray[3].split("/")[1].split("_")[1]
+        console.log(currentMainLocation)
     } else {
         currentMainLocation = "Fairview"
     }
@@ -102,36 +103,62 @@ function getWorldData(textArray, worldMode) {
 
         lastEventname = eventName
 
+        console.log(textLine)
+
         if (textLine.search("SmallD") != -1) {
             eventType = "Side Dungeon"
             eventName = textLine.split("/")[3].split("_")[2]
             currentSublocation = sublocations[eventName]
+            if (currentSublocation == undefined){
+                currentSublocation = "Not added yet"
+            } 
             inSmallDungeon = true
         }
         if (textLine.search("OverworldPOI") != -1) {
             eventType = "Point of Interest"
             eventName = textLine.split("/")[3].split("_")[2]
             currentSublocation = currentMainLocation
+            if (worldMode == "#adventure") {
+                currentSublocation = ''
+            }
+            if (currentSublocation == undefined){
+                currentSublocation = "Not added yet"
+            } 
             inSmallDungeon = true
         }
         if (textLine.search("Quest_Boss") != -1) {
             eventType = "World Boss"
             eventName = textLine.split("/")[3].split("_")[2]
             currentSublocation = sublocations[eventName]
+            if (currentSublocation == undefined){
+                currentSublocation = "Not added yet"
+            } 
         }
         if (textLine.search("Siege") != -1) {
             eventType = "Siege"
             eventName = textLine.split("/")[3].split("_")[2]
             currentSublocation = sublocations[eventName]
+            if (currentSublocation == undefined){
+                currentSublocation = "Not added yet"
+            } 
         }
         if (textLine.search("Mini") != -1) {
             eventType = "Miniboss"
             eventName = textLine.split("/")[3].split("_")[2]
             currentSublocation = sublocations[eventName]
+            if (currentSublocation == undefined){
+                currentSublocation = "Not added yet"
+            } 
         }
         if (textLine.search("Quest_Event") != -1) {
             eventType = "Item Drop"
             eventName = textLine.split("/")[3].split("_")[2]
+
+            // edge case for out of order items
+            if (textLine.split("/")[1].split("_")[1] != textArray[i - 1].split("/")[1].split("_")[1]) {
+                currentSublocation = ''
+            }
+
         }
 
         if (textLine.search("Overworld_Zone") != -1) {
@@ -152,17 +179,27 @@ function getWorldData(textArray, worldMode) {
                     if (zones[zone][eventType].search(eventName) == -1) {
                         zones[zone][eventType] += ", " + eventName
 
-                        html = "<tr><td>" + zone + ": " + currentMainLocation.split(/(?=[A-Z])/).join(' ') + ": " + currentSublocation.split(/(?=[A-Z])/).join(' ') +  "</td><td>" + eventType + "</td><td>" + eventName.split(/(?=[A-Z])/).join(' ') + "</td></tr>"
-                        
-                        $(worldMode).append(html)
+                        if (worldMode == "#adventure") {
+                            mainLocationText = ''
+                        } else {
+                            mainLocationText = currentMainLocation.split(/(?=[A-Z])/).join(' ') + ": "
+                        }
+                        html = "<tr><td>" + zone + ": " + mainLocationText + currentSublocation.split(/(?=[A-Z])/).join(' ') +  "</td><td>" + eventType + "</td><td>" + eventName.split(/(?=[A-Z])/).join(' ') + "</td></tr>"   
                     }       
                 } else {
                     zones[zone][eventType] = eventName
-                        html = "<tr><td>" + zone + ": " + currentMainLocation.split(/(?=[A-Z])/).join(' ') + ": " + currentSublocation.split(/(?=[A-Z])/).join(' ') +  "</td><td>" + eventType + "</td><td>" + eventName.split(/(?=[A-Z])/).join(' ') + "</td></tr>"
-                    $(worldMode).append(html)
+
+                        if (worldMode == "#adventure") {
+                            mainLocationText = ''
+                        } else {
+                            mainLocationText = currentMainLocation.split(/(?=[A-Z])/).join(' ') + ": "
+                        }
+
+                        html = "<tr><td>" + zone + ": " + mainLocationText + currentSublocation.split(/(?=[A-Z])/).join(' ') +  "</td><td>" + eventType + "</td><td>" + eventName.split(/(?=[A-Z])/).join(' ') + "</td></tr>"     
                 }
+                $(worldMode).append(html)
             }
-            $('#filters').show()
+            $('#filters, #filters-right').show()
         }            
     }
 
@@ -197,8 +234,7 @@ function showDataFile(e, o){
 
     if (adventureMode) {
         getWorldData(adTextArray, "#adventure")
-    } 
-    
+    }  
     getWorldData(textArray, "#main")
 
 
@@ -231,6 +267,11 @@ $( document ).ready(function() {
     })
     $('#toggle-adv').on('click', function() {
        $('.main-mode, .adventure-mode').toggle()
+       if ($(this).text() == "Show Adventure Mode") {
+        $(this).text("Show Campaign Mode") 
+       } else {
+         $(this).text("Show Adventure Mode")
+       }
     })
     $('#toggle-poi').on('click', function() {
        $('tr:not(.header-row)').hide()
@@ -248,7 +289,7 @@ $( document ).ready(function() {
             }
         })     
     })
-     $('#toggle-sieges').on('click', function() {
+    $('#toggle-sieges').on('click', function() {
        $('tr:not(.header-row)').hide()
         $('td').each(function() {
             if ($(this).text().search('Siege') != -1) {
@@ -256,7 +297,39 @@ $( document ).ready(function() {
             }
         })     
     })
-        $('#toggle-all').on('click', function() {
+    $('#toggle-earth').on('click', function() {
+       $('tr:not(.header-row)').hide()
+        $('td').each(function() {
+            if ($(this).text().search('Earth') != -1) {
+                $(this).parent().show()
+            }
+        })     
+    })
+    $('#toggle-rhom').on('click', function() {
+       $('tr:not(.header-row)').hide()
+        $('td').each(function() {
+            if ($(this).text().search('Rhom') != -1) {
+                $(this).parent().show()
+            }
+        })     
+    })
+    $('#toggle-corsus').on('click', function() {
+       $('tr:not(.header-row)').hide()
+        $('td').each(function() {
+            if ($(this).text().search('Corsus') != -1) {
+                $(this).parent().show()
+            }
+        })     
+    })
+    $('#toggle-yaesha').on('click', function() {
+       $('tr:not(.header-row)').hide()
+        $('td').each(function() {
+            if ($(this).text().search('Yaesha') != -1) {
+                $(this).parent().show()
+            }
+        })     
+    })
+        $('.toggle-all').on('click', function() {
             $('tr').show()
     })
 })
