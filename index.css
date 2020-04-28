@@ -42,7 +42,16 @@ input, button {
   top: 15vh;
 }
 
-#filters button {
+#filters-right {
+  position: fixed;
+  left: calc(75vw);
+  display: none;
+  width: 320px;
+  top: 15vh;
+}
+
+
+#filters button, #filters-right button {
   width: 320px;
   margin-left: 0px;
 }
