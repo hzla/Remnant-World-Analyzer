@@ -56,37 +56,34 @@ mainLocations = {
 }
 
 function loadFile(o) {
-    
-        var fr = new FileReader();
-        fr.onload = function(e)
-            {
-                showDataFile(e, o);
-            };
-        fr.readAsText(o.files[0]);
+    var fr = new FileReader();
+    fr.onload = function(e) {
+      showDataFile(e, o);
+    };
+    fr.readAsText(o.files[0]);
 }
 
 
 function getWorldData(textArray, worldMode) {
 
     zones = {}
-            
+
     zones["Earth"] = {}
     zones["Rhom"] = {}
     zones["Yaesha"] = {}
     zones["Corsus"] = {}
-    
-    var currentMainLocation; 
+
+    var currentMainLocation;
 
     if (worldMode == "#adventure") {
         currentMainLocation = textArray[3].split("/")[1].split("_")[1]
-        console.log(currentMainLocation)
     } else {
         currentMainLocation = "Fairview"
     }
 
     var currentSublocation = "";
 
-    for (i=0; i < textArray.length; i ++) {
+    for (i = 0; i < textArray.length; i++) {
         var zone;
         var eventType;
         var eventName;
@@ -94,6 +91,8 @@ function getWorldData(textArray, worldMode) {
         var inSmallDungeon = true;
 
         textLine = textArray[i]
+
+        //translate world/region names to readable text
         if ( textLine.search("World_City") != -1) {
             zone = "Earth"
         }
@@ -109,17 +108,17 @@ function getWorldData(textArray, worldMode) {
 
         lastEventname = eventName
 
-        console.log(textLine)
-
+        //look for side dungeons
         if (textLine.search("SmallD") != -1) {
             eventType = "Side Dungeon"
             eventName = textLine.split("/")[3].split("_")[2]
             currentSublocation = sublocations[eventName]
             if (currentSublocation == undefined){
                 currentSublocation = "Not added yet"
-            } 
+            }
             inSmallDungeon = true
         }
+        //look for overworld POI's
         if (textLine.search("OverworldPOI") != -1) {
             eventType = "Point of Interest"
             eventName = textLine.split("/")[3].split("_")[2]
@@ -129,33 +128,41 @@ function getWorldData(textArray, worldMode) {
             }
             if (currentSublocation == undefined){
                 currentSublocation = "Not added yet"
-            } 
+            }
             inSmallDungeon = true
         }
+
+        //Look for quest bosses
         if (textLine.search("Quest_Boss") != -1) {
             eventType = "World Boss"
             eventName = textLine.split("/")[3].split("_")[2]
             currentSublocation = sublocations[eventName]
             if (currentSublocation == undefined){
                 currentSublocation = "Not added yet"
-            } 
+            }
         }
+
+        //look for sieges
         if (textLine.search("Siege") != -1) {
             eventType = "Siege"
             eventName = textLine.split("/")[3].split("_")[2]
             currentSublocation = sublocations[eventName]
             if (currentSublocation == undefined){
                 currentSublocation = "Not added yet"
-            } 
+            }
         }
+
+        //look for minibosses
         if (textLine.search("Mini") != -1) {
             eventType = "Miniboss"
             eventName = textLine.split("/")[3].split("_")[2]
             currentSublocation = sublocations[eventName]
             if (currentSublocation == undefined){
                 currentSublocation = "Not added yet"
-            } 
+            }
         }
+
+        //look for Item drops
         if (textLine.search("Quest_Event") != -1) {
             eventType = "Item Drop"
             eventName = textLine.split("/")[3].split("_")[2]
@@ -170,15 +177,40 @@ function getWorldData(textArray, worldMode) {
         if (textLine.search("Overworld_Zone") != -1) {
             currentMainLocation = textLine.split("/")[3].split("_")[1] + " " + textLine.split("/")[3].split("_")[2] + " " +  textLine.split("/")[3].split("_")[3]
             currentMainLocation = mainLocations[currentMainLocation]
+
         }
-        
+
+        //Renames the bosses
         if (eventName != lastEventname) {
           // Replacements
             if (eventName != undefined) {
-                 eventName = eventName.replace('FlickeringHorror', 'DreamEater').replace('Wisp', 'HiveWisps').replace('TheRisen', 'Reanimators').replace('LizAndLiz', 'LizChicagoTypewriter').replace('Fatty', 'TheUncleanOne').replace('WastelandGuardian', 'Claviger').replace('RootEnt', 'EntBoss').replace('Wolf', 'TheRavager').replace('RootDragon', 'Singe').replace('SwarmMaster', 'Scourge').replace('RootWraith','Shroud').replace('RootTumbleweed', 'TheMangler').replace('Kincaller', 'Warden').replace('Tyrant','Thrall').replace('Vyr', 'ShadeAndShatter').replace('ImmolatorAndZephyr','ScaldAndSear').replace('RootBrute', 'Gorefist').replace('SlimeHulk', 'Canker').replace('BlinkFiend','Onslaught').replace('Sentinel', 'Raze').replace('Penitent', 'Letos Amulet').replace('LastWill', 'SupplyRunAssaultRifle').replace('SwampGuardian','Ixillis').replace('Splitter','RiphideLetosArmor')
-                
+                 eventName = eventName.replace('FlickeringHorror', 'DreamEater')
+                 .replace('Wisp', 'HiveWisps')
+                 .replace('TheRisen', 'Reanimators')
+                 .replace('LizAndLiz', 'LizChicagoTypewriter')
+                 .replace('Fatty', 'TheUncleanOne')
+                 .replace('WastelandGuardian', 'Claviger')
+                 .replace('RootEnt', 'EntBoss')
+                 .replace('Wolf', 'TheRavager')
+                 .replace('RootDragon', 'Singe')
+                 .replace('SwarmMaster', 'Scourge')
+                 .replace('RootWraith','Shroud')
+                 .replace('RootTumbleweed', 'TheMangler')
+                 .replace('Kincaller', 'Warden')
+                 .replace('Tyrant','Thrall')
+                 .replace('Vyr', 'ShadeAndShatter')
+                 .replace('ImmolatorAndZephyr','ScaldAndSear')
+                 .replace('RootBrute', 'Gorefist')
+                 .replace('SlimeHulk', 'Canker')
+                 .replace('BlinkFiend','Onslaught')
+                 .replace('Sentinel', 'Raze')
+                 .replace('Penitent', 'Letos Amulet')
+                 .replace('LastWill', 'SupplyRunAssaultRifle')
+                 .replace('SwampGuardian','Ixillis')
+                 .replace('Splitter','RiphideLetosArmor')
+
             }
-           
+            //This populates the table for data to be pulled
             if (zone != undefined && eventType != undefined && eventName != undefined) {
 
                 if (zones[zone][eventType] != undefined) {
@@ -190,8 +222,8 @@ function getWorldData(textArray, worldMode) {
                         } else {
                             mainLocationText = currentMainLocation.split(/(?=[A-Z])/).join(' ') + ": "
                         }
-                        html = "<tr><td>" + zone + ": " + mainLocationText + currentSublocation.split(/(?=[A-Z])/).join(' ') +  "</td><td>" + eventType + "</td><td>" + eventName.split(/(?=[A-Z])/).join(' ') + "</td></tr>"   
-                    }       
+                        html = "<tr><td>" + zone + ": " + mainLocationText + currentSublocation.split(/(?=[A-Z])/).join(' ') +  "</td><td>" + eventType + "</td><td>" + eventName.split(/(?=[A-Z])/).join(' ') + "</td></tr>"
+                    }
                 } else {
                     zones[zone][eventType] = eventName
 
@@ -201,32 +233,41 @@ function getWorldData(textArray, worldMode) {
                             mainLocationText = currentMainLocation.split(/(?=[A-Z])/).join(' ') + ": "
                         }
 
-                        html = "<tr><td>" + zone + ": " + mainLocationText + currentSublocation.split(/(?=[A-Z])/).join(' ') +  "</td><td>" + eventType + "</td><td>" + eventName.split(/(?=[A-Z])/).join(' ') + "</td></tr>"     
+                        html = "<tr><td>" + zone + ": " + mainLocationText + currentSublocation.split(/(?=[A-Z])/).join(' ') +  "</td><td>" + eventType + "</td><td>" + eventName.split(/(?=[A-Z])/).join(' ') + "</td></tr>"
                 }
                 $(worldMode).append(html)
             }
             $('#filters, #filters-right').show()
-        }            
+        }
     }
 
 
 }
-   
+
 
 
 function showDataFile(e, o){
 
     $('tr:not(.header-row)').remove()
 
-    text = e.target.result 
+    text = e.target.result
     text = text.split("/Game/Campaign_Main/Quest_Campaign_Ward13.Quest_Campaign_Ward13")[0]
     text = text.split("/Game/Campaign_Main/Quest_Campaign_City.Quest_Campaign_City")[1].replace(/Game/g,"\n")
-    
+
     textArray = text.split("\n")
 
-
    adText = e.target.result
-    adText = adText.split(/\/Quests\/Quest_AdventureMode(.+)/)[1]
+
+   adText = adText.split("\n")
+   tempList = []
+   for(i = 0; i < adText.length; i++)
+   {
+     if (String(adText[i]).includes('Adventure') === true)
+     {
+       tempList.push(adText[i])
+     }
+   }
+   adText = tempList[1]
     if (adText != undefined) {
         adventureMode = true
         adText = adText.replace(/Game/g,"\n")
@@ -235,12 +276,12 @@ function showDataFile(e, o){
         adventureMode = false
     }
 
-        
-   
+
+
 
     if (adventureMode) {
         getWorldData(adTextArray, "#adventure")
-    }  
+    }
     getWorldData(textArray, "#main")
 
 
@@ -274,7 +315,7 @@ $( document ).ready(function() {
     $('#toggle-adv').on('click', function() {
        $('.main-mode, .adventure-mode').toggle()
        if ($(this).text() == "Show Adventure Mode") {
-        $(this).text("Show Campaign Mode") 
+        $(this).text("Show Campaign Mode")
        } else {
          $(this).text("Show Adventure Mode")
        }
@@ -293,7 +334,7 @@ $( document ).ready(function() {
             if ($(this).text().search('World Boss') != -1) {
                 $(this).parent().show()
             }
-        })     
+        })
     })
     $('#toggle-sieges').on('click', function() {
        $('tr:not(.header-row)').hide()
@@ -301,7 +342,7 @@ $( document ).ready(function() {
             if ($(this).text().search('Siege') != -1) {
                 $(this).parent().show()
             }
-        })     
+        })
     })
     $('#toggle-earth').on('click', function() {
        $('tr:not(.header-row)').hide()
@@ -309,7 +350,7 @@ $( document ).ready(function() {
             if ($(this).text().search('Earth') != -1) {
                 $(this).parent().show()
             }
-        })     
+        })
     })
     $('#toggle-rhom').on('click', function() {
        $('tr:not(.header-row)').hide()
@@ -317,7 +358,7 @@ $( document ).ready(function() {
             if ($(this).text().search('Rhom') != -1) {
                 $(this).parent().show()
             }
-        })     
+        })
     })
     $('#toggle-corsus').on('click', function() {
        $('tr:not(.header-row)').hide()
@@ -325,7 +366,7 @@ $( document ).ready(function() {
             if ($(this).text().search('Corsus') != -1) {
                 $(this).parent().show()
             }
-        })     
+        })
     })
     $('#toggle-yaesha').on('click', function() {
        $('tr:not(.header-row)').hide()
@@ -333,10 +374,9 @@ $( document ).ready(function() {
             if ($(this).text().search('Yaesha') != -1) {
                 $(this).parent().show()
             }
-        })     
+        })
     })
         $('.toggle-all').on('click', function() {
             $('tr').show()
     })
 })
-
