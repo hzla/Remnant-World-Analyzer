@@ -14,7 +14,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <link rel="stylesheet" type="text/css" href="index.css">
         <script src="index.js?version=2.1"></script>
-
+        
     </head>
      <body>
         <h1>Remnant: From the Ashes World Analyzer</h1>
@@ -40,21 +40,45 @@
 
         <div id="filters">
             <button id="toggle-adv">Show Adventure Mode</button>
-            <button id="toggle-items">Only Items</button>
-            <button id="toggle-sd">Only Side Dungeons</button>
-            <button id="toggle-sieges">Only Sieges</button>
-            <button id="toggle-poi">Only Points of Interest</button>
-            <button id="toggle-mb">Only Mini Bosses</button>
-            <button id="toggle-bosses">Only Bosses</button>
-            <button class="toggle-all">Show All</button>
-        </div>
 
-        <div id="filters-right">
-            <button id="toggle-earth">Only Earth</button>
-            <button id="toggle-rhom">Only Rhom</button>
-            <button id="toggle-corsus">Only Corsus</button>
-            <button id="toggle-yaesha">Only Yaesha</button>
-            <button class="toggle-all">Show All</button>
+            <br />
+
+            <div id="select-filters">
+                <fieldset>
+                <legend>Regions:</legend>
+
+                <label><input type="checkbox" id="f-earth" class="filter" checked>Earth</label>
+                <label><input type="checkbox" id="f-rhom" class="filter" checked>Rhom</label>
+                <label><input type="checkbox" id="f-corsus" class="filter" checked>Corsus</label>
+                <label><input type="checkbox" id="f-yaesha" class="filter" checked>Yaesha</label>
+                </fieldset>
+
+                <br/>
+
+                <fieldset>
+                <legend>Type:</legend>
+                <label><input type="checkbox" id="f-items" class="filter" checked>Items</label>
+                <label><input type="checkbox" id="f-sidedgs" class="filter" checked>Side Dungeons</label>
+                <label><input type="checkbox" id="f-sieges" class="filter" checked>Sieges</label>
+                <label><input type="checkbox" id="f-poi" class="filter" checked>Points of Interest</label>
+                <label><input type="checkbox" id="f-minibosses" class="filter" checked>Mini Bosses</label>
+                <label><input type="checkbox" id="f-bosses" class="filter" checked>Bosses</label>
+                </fieldset>
+
+                <br/>
+                
+                <fieldset>
+                <legend>Name filter:</legend>
+
+                <label><input type="text" id="f-name" class="filter" placeholder="Input event name filter"></label><button class="clear-button" onclick="document.getElementById('f-name').value=''">X</button>
+                </fieldset>
+
+                <br/>
+
+                <button class="half-button" onclick="updateFilters(false)">Hide all</button> <button class="half-button" onclick="updateFilters(true)">Show all</button>
+                <br/>
+                <button id="apply">Apply</button>
+            </div>
         </div>
 
 
