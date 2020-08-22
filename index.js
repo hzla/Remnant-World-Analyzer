@@ -58,14 +58,34 @@ mainLocations = {
 function loadFile(o) {
     var fr = new FileReader();
     fr.onload = function(e) {
-      showDataFile(e, o);
+        showDataFile(e, o);
     };
     fr.readAsText(o.files[0]);
 }
 
+function preventDefaults (e) {
+    e.preventDefault()
+    e.stopPropagation()
+}
+
+let dropArea;
+
+function highlight(e) {
+    dropArea.classList.add('highlight');
+}
+
+function unhighlight(e) {
+    dropArea.classList.remove('highlight');
+}
+
+function handleDrop(e) {
+    files = e.dataTransfer.files;
+
+    o = {files: files}
+    loadFile(o);
+}
 
 function getWorldData(textArray, worldMode) {
-
     zones = {}
 
     zones["Earth"] = {}
@@ -287,15 +307,14 @@ function showDataFile(e, o){
         adventureMode = false
     }
 
-
-
-
     if (adventureMode) {
         getWorldData(adTextArray, "#adventure")
     }
     getWorldData(textArray, "#main")
 
-
+    $('.main-mode').show()
+    $('.adventure-mode').hide()
+    $('#toggle-adv').text("Show Adventure Mode")
 }
 
 updateTable = function() {
@@ -383,4 +402,15 @@ $( document ).ready(function() {
             $(this).text("Show Adventure Mode")
         }
     })
+
+    dropArea = document.getElementById('drop-area');
+    dropArea.addEventListener('dragenter',preventDefaults, false);
+    dropArea.addEventListener('dragenter',highlight, false);
+    dropArea.addEventListener('dragover',preventDefaults, false);
+    dropArea.addEventListener('dragover',highlight, false);
+    dropArea.addEventListener('dragleave',preventDefaults, false);
+    dropArea.addEventListener('dragleave',unhighlight, false);
+    dropArea.addEventListener('drop',preventDefaults, false);
+    dropArea.addEventListener('drop',unhighlight, false);
+    dropArea.addEventListener('drop',handleDrop, false);
 })

@@ -14,7 +14,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <link rel="stylesheet" type="text/css" href="index.css">
         <script src="index.js?version=2.1"></script>
-        
+
     </head>
      <body>
         <h1>Remnant: From the Ashes World Analyzer</h1>
@@ -36,7 +36,10 @@
 
 
         </p>
+        <div id="drop-area">
         <input type="file" onchange="loadFile(this)">
+        <p style="text-align: center; font-size:25px;">Choose or drop file</p>
+        </div>
 
         <div id="filters">
             <button id="toggle-adv">Show Adventure Mode</button>
@@ -82,7 +85,7 @@
         </div>
 
 
-        <table class="piece-table main-mode">
+        <table class="piece-table main-mode" style="display:none;">
             <thead>
                 <tr class="header-row">
                     <th class="headerSort" tabindex="0" role="columnheader button">Location

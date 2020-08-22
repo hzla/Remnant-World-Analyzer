@@ -32,13 +32,24 @@ input {
 
 input[type="file"] {
   height: 32px;
-  margin-left: calc(25vw);
   width: 140px;
   border-radius: 5px;
   font-size: 24px;
   padding: 4px 10px;
   border: none;
-  margin-top: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+#drop-area {
+  padding: 10px 15px;
+  border: 2px solid black;
+  margin: 10px calc(25vw);
+}
+
+#drop-area.highlight {
+  border-color: white;
 }
 
 input[type="text"] {
