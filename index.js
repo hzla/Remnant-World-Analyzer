@@ -1,17 +1,23 @@
 sublocations = {
-    "RootCultist": "MarrowPass",
+	//Double checked location and events with remnantfromtheashes.wiki.fextralife.com
+	
+	//Earth
     "RootWraith": "TheHiddenSanctum",
     "RootBrute": "SunkenPassage",
     "Brabus": "CutthroatChannel",
     "RootTumbleweed": "TheTangledPass",
+    "Splitter": "ResearchStationAlpha",
     "RootEnt": "TheChokingHollow",
     "RootDragon": "TheAshYard",
     "HuntersHideout": "HiddenGrotto",
     "MadMerchant": "Junktown",
-    "LizAndLiz": "TheWarren",
-    "LastWill": "FindMonkeyKey",
+    "LastWill": "Sorrow'sField",
     "RootShrine": "TheGallows",
-    "SwarmMaster": "TheIronRift",
+    "LizAndLiz": "TheWarren",
+	"RootCultist": "MarrowPass",
+	
+	// Rhom
+    "SwarmMaster": "TheIronRift",	
     "HoundMaster": "TheBurrows",
     "Sentinel": "ShackledCanyon",
     "Vyr": "TheArdentTemple",
@@ -20,29 +26,46 @@ sublocations = {
     "TheLostGantry": "ConcourseOfTheSun",
     "ArmorVault": "VaultOfTheHeralds",
     "TheCleanRoom": "ThePurgeHall",
+	
+	// Corsus
     "SlimeHulk": "TheDrownedTrench",
-    "Fatty": "TheFetidGlade",
     "Tyrant": "TheCapillary",
-    "SwampGuardian": 'The Grotto',
-    'KinCaller': "TheHallOfJudgement",
-    "BlinkFiend": "Widow'sPass",
-    'StuckMerchant': "MerchantDungeon",
-    'BlinkThief': 'ForgottenUndercroft',
-    "StormCaller": "Heretic'sNest",
-    "ImmolatorAndZephyr": "WitheringVillage",
-    'Wolf': "TheScaldingGlade",
-    'TotemFather': "TheScaldingGlade",
-    'TheRisen': "Ahanae'sLament",
-    'DoeShrine': "Widow'sVestry",
-    'WolfShrine': "Martyr'sSanctuary",
-    "Splitter": "ResearchStationAlpha",
+    "FlickeringHorror": "HallOfWhispers",
     "BarbTerror": "NeedleLair",
     "QueensTemple": "IskalTemple",
-    "BrainBug": "StrangePass",
+    "SwampGuardian": 'TheGrotto',
     "Wisp": "CircletHatchery",
     "FetidPool": "FetidPools",
-    "FlickeringHorror": "HallOfWhispers"
+    "BrainBug": "StrangePass",
+    "Fatty": " TheShack",
+	
+	// Yaesha
+    'KinCaller': "TheHallOfJudgement",
+    "BlinkFiend": "Widow'sPass",
+    'BlinkThief': 'VerdantStrand',
+    "StormCaller": "Heretic'sNest",
+    "ImmolatorAndZephyr": "WitheringVillage",
+	"Wolf": "Ravager'sHaunt",
+    'DoeShrine': "Widow'sVestry",
+    'WolfShrine': "TempleOfTheRavager",
+    'TheRisen': "Ahanae'sLament",
+    'TotemFather': "TheScaldingGlade",
+    'StuckMerchant': "MerchantDungeon",
+	
+	//Reisum
+	"UrikkiBlademasters": "ValenhagMines",
+	"ShieldWarden": "Exiles'sTrench",
+	"BlizzardMage": "WutheringKeep",
+	"TheJackal": "WildReach",
+	"WarningTotems": "Magir'sDirge",
+	"ShamanFlames": "GraveOfTheElders",
+	"RatRider": "CrimsonHold",
+	"FrozenLords": "Judgement'sSpear",
+	"IceSkimmer": "TheFrieranSea",
+	"CreepersPeeper": "Watcher'sHollow"
+
 }
+
 
 mainLocations = {
  "City Overworld Zone1": "Fairview",
@@ -52,7 +75,9 @@ mainLocations = {
  "Jungle Overworld Zone1": "TheVerdantStrand",
  "Jungle Overworld Zone2": "TheScaldingGlade",
  "Swamp Overworld Zone1": "TheFetidGlade",
- "Swamp Overworld Zone2": "TheMistFen"
+ "Swamp Overworld Zone2": "TheMistFen",
+ "Snow Overworld Zone1": "DrolniirWoods",
+ "Snow Overworld Zone2": "DeepfrostExpanse"
 }
 
 function loadFile(o) {
@@ -92,6 +117,7 @@ function getWorldData(textArray, worldMode) {
     zones["Rhom"] = {}
     zones["Yaesha"] = {}
     zones["Corsus"] = {}
+    zones["Reisum"] = {}
 
     var currentMainLocation;
 
@@ -130,6 +156,9 @@ function getWorldData(textArray, worldMode) {
         }
         if ( textLine.search("World_Swamp") != -1) {
             zone = "Corsus"
+        }
+        if ( textLine.search("World_Snow") != -1) {
+            zone = "Reisum"
         }
 
         lastEventname = eventName
@@ -217,7 +246,6 @@ function getWorldData(textArray, worldMode) {
                  .replace('Fatty', 'TheUncleanOne')
                  .replace('WastelandGuardian', 'Claviger')
                  .replace('RootEnt', 'EntBoss')
-                 .replace('Wolf', 'TheRavager')
                  .replace('RootDragon', 'Singe')
                  .replace('SwarmMaster', 'Scourge')
                  .replace('RootWraith','Shroud')
@@ -234,6 +262,8 @@ function getWorldData(textArray, worldMode) {
                  .replace('LastWill', 'SupplyRunAssaultRifle')
                  .replace('SwampGuardian','Ixillis')
                  .replace('Splitter','RiphideLetosArmor')
+				 .replace('RatRider','Brudvaak')
+				 
 
             }
             //This populates the table for data to be pulled
@@ -323,12 +353,18 @@ function showDataFile(e, o){
 
     if (adventureMode) {
         getWorldData(adTextArray, "#adventure")
-    }
-    getWorldData(textArray, "#main")
+		
+		$('.main-mode').hide()
+		$('.adventure-mode').show()
+		$('#toggle-adv').text("Show Campaign Mode")
+    } else {
+		getWorldData(textArray, "#main")
+		
+		$('.main-mode').show()
+		$('.adventure-mode').hide()
+		$('#toggle-adv').text("Show Adventure Mode")
+	}
 
-    $('.main-mode').show()
-    $('.adventure-mode').hide()
-    $('#toggle-adv').text("Show Adventure Mode")
 }
 
 updateTable = function() {
@@ -382,12 +418,14 @@ updateTable = function() {
     earth = document.getElementById('f-earth').checked
     rhom = document.getElementById('f-rhom').checked
     corsus = document.getElementById('f-corsus').checked
-    yaesha = document.getElementById('f-yaesha').checked
+    yaesha = document.getElementById('f-reisum').checked
+    reisum = document.getElementById('f-yaesha').checked
     $('td').each(function() {
         if (
         ($(this).text().search('Earth')!=-1 && !earth) ||
         ($(this).text().search('Rhom')!=-1 && !rhom) ||
         ($(this).text().search('Corsus')!=-1 && !corsus) ||
+        ($(this).text().search('Reisum')!=-1 && !reisum) ||
         ($(this).text().search('Yaesha')!=-1 && !yaesha))
         {
             $(this).parent().hide()
