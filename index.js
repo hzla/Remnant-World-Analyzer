@@ -270,7 +270,7 @@ function getWorldData(textArray, worldMode) {
             if (zone != undefined && eventType != undefined && eventName != undefined) {
 
                 if (zones[zone][eventType] != undefined) {
-                    if (zones[zone][eventType].search(eventName) == -1) {
+                    if (zones[zone][eventType].search(eventName) == -1 || eventName ==="TraitBook" ) {
                         zones[zone][eventType] += ", " + eventName
 
                         if (worldMode == "#adventure") {
@@ -279,7 +279,8 @@ function getWorldData(textArray, worldMode) {
                             mainLocationText = currentMainLocation.split(/(?=[A-Z])/).join(' ') + ": "
                         }
                         html = "<tr><td>" + zone + ": " + mainLocationText + currentSublocation.split(/(?=[A-Z])/).join(' ') +  "</td><td>" + eventType + "</td><td>" + eventName.split(/(?=[A-Z])/).join(' ') + "</td></tr>"
-                    }
+                        $(worldMode).append(html)
+		    }
                 } else {
                     zones[zone][eventType] = eventName
 
@@ -290,8 +291,8 @@ function getWorldData(textArray, worldMode) {
                         }
 
                         html = "<tr><td>" + zone + ": " + mainLocationText + currentSublocation.split(/(?=[A-Z])/).join(' ') +  "</td><td>" + eventType + "</td><td>" + eventName.split(/(?=[A-Z])/).join(' ') + "</td></tr>"
+                        $(worldMode).append(html)
                 }
-                $(worldMode).append(html)
             }
             $('#filters').show()
         }
