@@ -351,6 +351,9 @@ function showDataFile(e, o){
         adventureMode = false
     }
 
+    //always parse main campaign data
+    getWorldData(textArray, "#main")
+	
     if (adventureMode) {
         getWorldData(adTextArray, "#adventure")
 		
@@ -358,7 +361,6 @@ function showDataFile(e, o){
 		$('.adventure-mode').show()
 		$('#toggle-adv').text("Show Campaign Mode")
     } else {
-		getWorldData(textArray, "#main")
 		
 		$('.main-mode').show()
 		$('.adventure-mode').hide()
